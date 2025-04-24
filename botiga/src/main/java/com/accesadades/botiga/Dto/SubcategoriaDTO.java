@@ -7,4 +7,5 @@ public class SubcategoriaDTO {
     private Long idSubcategoria; 
     private String descSubcategoria;
     private String statusSubcategoria;
+    private Long idCategoria;
 }

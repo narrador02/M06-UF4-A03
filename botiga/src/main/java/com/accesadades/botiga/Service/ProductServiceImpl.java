@@ -8,9 +8,10 @@ import com.accesadades.botiga.Model.Subcategoria;
 import com.accesadades.botiga.Repository.ProductRepository;
 import com.accesadades.botiga.Repository.CategoriaRepository;
 import com.accesadades.botiga.Repository.SubcategoriaRepository;
-import com.accesadades.botiga.Service.BotigaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,13 +39,14 @@ public class ProductServiceImpl implements BotigaService<ProductDTO, Long> {
 
     @Override
     public void save(ProductDTO productDTO) {
-        Categoria categoria = categoriaRepository.findById(productDTO.getCategoria().getIdCategoria())
+        Product product = productMapper.toEntity(productDTO);
+
+        Categoria categoria = categoriaRepository.findById(productDTO.getIdCategoria())
                 .orElseThrow(() -> new RuntimeException("Categoria inexistent"));
 
-        Subcategoria subcategoria = subcategoriaRepository.findById(productDTO.getSubcategoria().getIdSubcategoria())
+        Subcategoria subcategoria = subcategoriaRepository.findById(productDTO.getIdSubcategoria())
                 .orElseThrow(() -> new RuntimeException("Subcategoria inexistent"));
 
-        Product product = productMapper.toEntity(productDTO);
         product.setCategoria(categoria);
         product.setSubcategoria(subcategoria);
 
@@ -55,11 +57,13 @@ public class ProductServiceImpl implements BotigaService<ProductDTO, Long> {
     public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
+
     public List<ProductDTO> findByName(String nom) {
-    return productRepository.findByNameContainingIgnoreCase(nom).stream()
-            .map(productMapper::toDTO)
-            .collect(Collectors.toList());
+        return productRepository.findByNameContainingIgnoreCase(nom).stream()
+                .map(productMapper::toDTO)
+                .collect(Collectors.toList());
     }
+
     public void updatePreu(Long id, double nouPreu) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producte inexistent"));
@@ -67,9 +71,11 @@ public class ProductServiceImpl implements BotigaService<ProductDTO, Long> {
         product.setPrice((float) nouPreu);
         productRepository.save(product);
     }
+
     public List<ProductDTO> findBySubcategoriaId(Long idSubcategoria) {
         return productRepository.findAll().stream()
-                .filter(p -> p.getSubcategoria() != null && p.getSubcategoria().getIdSubcategoria().equals(idSubcategoria))
+                .filter(p -> p.getSubcategoria() != null &&
+                             p.getSubcategoria().getIdSubcategoria().equals(idSubcategoria))
                 .map(productMapper::toDTO)
                 .collect(Collectors.toList());
     }

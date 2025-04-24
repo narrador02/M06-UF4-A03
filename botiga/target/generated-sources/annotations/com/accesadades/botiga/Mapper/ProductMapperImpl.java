@@ -1,8 +1,6 @@
 package com.accesadades.botiga.Mapper;
 
-import com.accesadades.botiga.Dto.CategoriaDTO;
 import com.accesadades.botiga.Dto.ProductDTO;
-import com.accesadades.botiga.Dto.SubcategoriaDTO;
 import com.accesadades.botiga.Model.Categoria;
 import com.accesadades.botiga.Model.Product;
 import com.accesadades.botiga.Model.Subcategoria;
@@ -11,25 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-24T16:37:21+0200",
+    date = "2025-04-24T19:07:52+0200",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
-
-    @Override
-    public ProductDTO toDTO(Product product) {
-        if ( product == null ) {
-            return null;
-        }
-
-        ProductDTO productDTO = new ProductDTO();
-
-        productDTO.setCategoria( categoriaToCategoriaDTO( product.getCategoria() ) );
-        productDTO.setSubcategoria( subcategoriaToSubcategoriaDTO( product.getSubcategoria() ) );
-
-        return productDTO;
-    }
 
     @Override
     public Product toEntity(ProductDTO productDTO) {
@@ -39,65 +23,36 @@ public class ProductMapperImpl implements ProductMapper {
 
         Product product = new Product();
 
-        product.setCategoria( categoriaDTOToCategoria( productDTO.getCategoria() ) );
-        product.setSubcategoria( subcategoriaDTOToSubcategoria( productDTO.getSubcategoria() ) );
-
         return product;
     }
 
-    protected CategoriaDTO categoriaToCategoriaDTO(Categoria categoria) {
+    @Override
+    public ProductDTO toDTO(Product product) {
+        if ( product == null ) {
+            return null;
+        }
+
+        ProductDTO productDTO = new ProductDTO();
+
+        productDTO.setIdCategoria( productCategoriaIdCategoria( product ) );
+        productDTO.setIdSubcategoria( productSubcategoriaIdSubcategoria( product ) );
+
+        return productDTO;
+    }
+
+    private Long productCategoriaIdCategoria(Product product) {
+        Categoria categoria = product.getCategoria();
         if ( categoria == null ) {
             return null;
         }
-
-        CategoriaDTO categoriaDTO = new CategoriaDTO();
-
-        categoriaDTO.setDescCategoria( categoria.getDescCategoria() );
-        categoriaDTO.setIdCategoria( categoria.getIdCategoria() );
-        categoriaDTO.setStatusCategoria( categoria.getStatusCategoria() );
-
-        return categoriaDTO;
+        return categoria.getIdCategoria();
     }
 
-    protected SubcategoriaDTO subcategoriaToSubcategoriaDTO(Subcategoria subcategoria) {
+    private Long productSubcategoriaIdSubcategoria(Product product) {
+        Subcategoria subcategoria = product.getSubcategoria();
         if ( subcategoria == null ) {
             return null;
         }
-
-        SubcategoriaDTO subcategoriaDTO = new SubcategoriaDTO();
-
-        subcategoriaDTO.setDescSubcategoria( subcategoria.getDescSubcategoria() );
-        subcategoriaDTO.setIdSubcategoria( subcategoria.getIdSubcategoria() );
-        subcategoriaDTO.setStatusSubcategoria( subcategoria.getStatusSubcategoria() );
-
-        return subcategoriaDTO;
-    }
-
-    protected Categoria categoriaDTOToCategoria(CategoriaDTO categoriaDTO) {
-        if ( categoriaDTO == null ) {
-            return null;
-        }
-
-        Categoria categoria = new Categoria();
-
-        categoria.setDescCategoria( categoriaDTO.getDescCategoria() );
-        categoria.setIdCategoria( categoriaDTO.getIdCategoria() );
-        categoria.setStatusCategoria( categoriaDTO.getStatusCategoria() );
-
-        return categoria;
-    }
-
-    protected Subcategoria subcategoriaDTOToSubcategoria(SubcategoriaDTO subcategoriaDTO) {
-        if ( subcategoriaDTO == null ) {
-            return null;
-        }
-
-        Subcategoria subcategoria = new Subcategoria();
-
-        subcategoria.setDescSubcategoria( subcategoriaDTO.getDescSubcategoria() );
-        subcategoria.setIdSubcategoria( subcategoriaDTO.getIdSubcategoria() );
-        subcategoria.setStatusSubcategoria( subcategoriaDTO.getStatusSubcategoria() );
-
-        return subcategoria;
+        return subcategoria.getIdSubcategoria();
     }
 }
