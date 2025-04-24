@@ -48,6 +48,7 @@ http://localhost:8081/swagger-ui-custom.html
   "statusCategoria": "Activa"
 }
 ```
+![image](https://github.com/user-attachments/assets/81163446-2648-4e1f-b493-fbff4ec3f92c)
 
 
 ---
