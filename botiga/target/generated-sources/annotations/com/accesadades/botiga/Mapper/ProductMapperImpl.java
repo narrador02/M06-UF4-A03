@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-24T14:42:57+0200",
+    date = "2025-04-24T16:37:21+0200",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
@@ -53,6 +53,7 @@ public class ProductMapperImpl implements ProductMapper {
         CategoriaDTO categoriaDTO = new CategoriaDTO();
 
         categoriaDTO.setDescCategoria( categoria.getDescCategoria() );
+        categoriaDTO.setIdCategoria( categoria.getIdCategoria() );
         categoriaDTO.setStatusCategoria( categoria.getStatusCategoria() );
 
         return categoriaDTO;
@@ -66,6 +67,7 @@ public class ProductMapperImpl implements ProductMapper {
         SubcategoriaDTO subcategoriaDTO = new SubcategoriaDTO();
 
         subcategoriaDTO.setDescSubcategoria( subcategoria.getDescSubcategoria() );
+        subcategoriaDTO.setIdSubcategoria( subcategoria.getIdSubcategoria() );
         subcategoriaDTO.setStatusSubcategoria( subcategoria.getStatusSubcategoria() );
 
         return subcategoriaDTO;
@@ -79,6 +81,7 @@ public class ProductMapperImpl implements ProductMapper {
         Categoria categoria = new Categoria();
 
         categoria.setDescCategoria( categoriaDTO.getDescCategoria() );
+        categoria.setIdCategoria( categoriaDTO.getIdCategoria() );
         categoria.setStatusCategoria( categoriaDTO.getStatusCategoria() );
 
         return categoria;
@@ -92,6 +95,7 @@ public class ProductMapperImpl implements ProductMapper {
         Subcategoria subcategoria = new Subcategoria();
 
         subcategoria.setDescSubcategoria( subcategoriaDTO.getDescSubcategoria() );
+        subcategoria.setIdSubcategoria( subcategoriaDTO.getIdSubcategoria() );
         subcategoria.setStatusSubcategoria( subcategoriaDTO.getStatusSubcategoria() );
 
         return subcategoria;
