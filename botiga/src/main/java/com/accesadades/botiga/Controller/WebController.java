@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.accesadades.botiga.Model.Product;
-import com.accesadades.botiga.Service.ProductService;
+import com.accesadades.botiga.Service.ProductServiceImpl;
 import java.util.Set;
 
 @Controller
 public class WebController {
 
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     @RequestMapping(value = "/")
     public String index(Model model) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-24T14:43:35+0200",
+    date = "2025-04-24T15:55:45+0200",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
@@ -22,6 +22,7 @@ public class CategoriaMapperImpl implements CategoriaMapper {
         CategoriaDTO categoriaDTO = new CategoriaDTO();
 
         categoriaDTO.setDescCategoria( categoria.getDescCategoria() );
+        categoriaDTO.setIdCategoria( categoria.getIdCategoria() );
         categoriaDTO.setStatusCategoria( categoria.getStatusCategoria() );
 
         return categoriaDTO;
@@ -36,6 +37,7 @@ public class CategoriaMapperImpl implements CategoriaMapper {
         Categoria categoria = new Categoria();
 
         categoria.setDescCategoria( categoriaDTO.getDescCategoria() );
+        categoria.setIdCategoria( categoriaDTO.getIdCategoria() );
         categoria.setStatusCategoria( categoriaDTO.getStatusCategoria() );
 
         return categoria;

@@ -1,12 +1,11 @@
-package main.java.com.accesadades.botiga.Service;
+package com.accesadades.botiga.Service;
 
-import com.accesadades.botiga.dto.SubcategoriaDTO;
-import com.accesadades.botiga.mapper.SubcategoriaMapper;
-import com.accesadades.botiga.model.Subcategoria;
-import com.accesadades.botiga.repository.SubcategoriaRepository;
+import com.accesadades.botiga.Dto.SubcategoriaDTO;
+import com.accesadades.botiga.Mapper.SubcategoriaMapper;
+import com.accesadades.botiga.Model.Subcategoria;
+import com.accesadades.botiga.Repository.SubcategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

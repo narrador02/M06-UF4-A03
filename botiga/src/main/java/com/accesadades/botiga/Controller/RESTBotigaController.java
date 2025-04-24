@@ -1,11 +1,11 @@
-package main.java.com.accesadades.botiga.Controller;
+package com.accesadades.botiga.Controller;
 
-import com.accesadades.botiga.dto.ProductDTO;
-import com.accesadades.botiga.dto.CategoriaDTO;
-import com.accesadades.botiga.dto.SubcategoriaDTO;
-import com.accesadades.botiga.service.ProductServiceImpl;
-import com.accesadades.botiga.service.CategoriaServiceImpl;
-import com.accesadades.botiga.service.SubcategoriaServiceImpl;
+import com.accesadades.botiga.Dto.ProductDTO;
+import com.accesadades.botiga.Dto.CategoriaDTO;
+import com.accesadades.botiga.Dto.SubcategoriaDTO;
+import com.accesadades.botiga.Service.ProductServiceImpl;
+import com.accesadades.botiga.Service.CategoriaServiceImpl;
+import com.accesadades.botiga.Service.SubcategoriaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

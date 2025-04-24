@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByNomContainingIgnoreCase(String name);
+    List<Product> findByNameContainingIgnoreCase(String name);
     Product findByName(String name);
     Set<Product> findByNameAndPrice(String name, float price);
 }

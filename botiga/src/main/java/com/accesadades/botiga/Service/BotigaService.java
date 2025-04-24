@@ -1,4 +1,4 @@
-package main.java.com.accesadades.botiga.Service;
+package com.accesadades.botiga.Service;
 
 import java.util.List;
 import java.util.Optional;
