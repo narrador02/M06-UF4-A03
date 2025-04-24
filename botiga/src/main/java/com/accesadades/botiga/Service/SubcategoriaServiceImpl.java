@@ -2,7 +2,9 @@ package com.accesadades.botiga.Service;
 
 import com.accesadades.botiga.Dto.SubcategoriaDTO;
 import com.accesadades.botiga.Mapper.SubcategoriaMapper;
+import com.accesadades.botiga.Model.Categoria;
 import com.accesadades.botiga.Model.Subcategoria;
+import com.accesadades.botiga.Repository.CategoriaRepository;
 import com.accesadades.botiga.Repository.SubcategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 public class SubcategoriaServiceImpl implements BotigaService<SubcategoriaDTO, Long> {
 
     @Autowired private SubcategoriaRepository subcategoriaRepository;
+    @Autowired private CategoriaRepository categoriaRepository;
     @Autowired private SubcategoriaMapper subcategoriaMapper;
 
     @Override
@@ -32,6 +35,11 @@ public class SubcategoriaServiceImpl implements BotigaService<SubcategoriaDTO, L
     @Override
     public void save(SubcategoriaDTO subcategoriaDTO) {
         Subcategoria subcategoria = subcategoriaMapper.toEntity(subcategoriaDTO);
+
+        Categoria categoria = categoriaRepository.findById(subcategoriaDTO.getIdCategoria())
+                .orElseThrow(() -> new RuntimeException("Categoria inexistent"));
+
+        subcategoria.setCategoria(categoria);
         subcategoriaRepository.save(subcategoria);
     }
 
