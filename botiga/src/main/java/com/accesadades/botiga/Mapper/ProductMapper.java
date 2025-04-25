@@ -10,9 +10,10 @@ import com.accesadades.botiga.Model.Product;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
-
     @Mappings({
+        @Mapping(source = "nom", target = "name"),
+        @Mapping(source = "preu", target = "price"),
+        @Mapping(source = "descripcio", target = "description"),
         @Mapping(target = "categoria", ignore = true),
         @Mapping(target = "subcategoria", ignore = true),
         @Mapping(target = "creationDate", ignore = true),
@@ -21,6 +22,9 @@ public interface ProductMapper {
     Product toEntity(ProductDTO productDTO);
 
     @Mappings({
+        @Mapping(source = "name", target = "nom"),
+        @Mapping(source = "price", target = "preu"),
+        @Mapping(source = "description", target = "descripcio"),
         @Mapping(target = "idCategoria", source = "categoria.idCategoria"),
         @Mapping(target = "idSubcategoria", source = "subcategoria.idSubcategoria")
     })
