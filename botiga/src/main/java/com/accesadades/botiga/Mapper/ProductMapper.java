@@ -14,19 +14,21 @@ public interface ProductMapper {
         @Mapping(source = "nom", target = "name"),
         @Mapping(source = "preu", target = "price"),
         @Mapping(source = "descripcio", target = "description"),
-        @Mapping(target = "categoria", ignore = true),
-        @Mapping(target = "subcategoria", ignore = true),
-        @Mapping(target = "creationDate", ignore = true),
-        @Mapping(target = "updateDate", ignore = true)
+        @Mapping(source = "company", target = "company"),
+        @Mapping(source = "units", target = "units"),
+        @Mapping(target = "categoria.idCategoria", source = "idCategoria"),
+        @Mapping(target = "subcategoria.idSubcategoria", source = "idSubcategoria")
     })
-    Product toEntity(ProductDTO productDTO);
+    Product toEntity(ProductDTO dto);
 
     @Mappings({
         @Mapping(source = "name", target = "nom"),
         @Mapping(source = "price", target = "preu"),
         @Mapping(source = "description", target = "descripcio"),
-        @Mapping(target = "idCategoria", source = "categoria.idCategoria"),
-        @Mapping(target = "idSubcategoria", source = "subcategoria.idSubcategoria")
+        @Mapping(source = "company", target = "company"),
+        @Mapping(source = "units", target = "units"),
+        @Mapping(source = "categoria.idCategoria", target = "idCategoria"),
+        @Mapping(source = "subcategoria.idSubcategoria", target = "idSubcategoria")
     })
     ProductDTO toDTO(Product product);
 }
