@@ -47,6 +47,11 @@ public class ProductServiceImpl implements BotigaService<ProductDTO, Long> {
         Subcategoria subcategoria = subcategoriaRepository.findById(productDTO.getIdSubcategoria())
                 .orElseThrow(() -> new RuntimeException("Subcategoria inexistent"));
 
+        //Validació implementada 
+        if (!subcategoria.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())) {
+            throw new RuntimeException("La subcategoria no pertany a la categoria indicada");
+        }
+
         product.setCategoria(categoria);
         product.setSubcategoria(subcategoria);
 
