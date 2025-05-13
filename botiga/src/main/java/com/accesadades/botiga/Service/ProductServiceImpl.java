@@ -8,6 +8,8 @@ import com.accesadades.botiga.Model.Subcategoria;
 import com.accesadades.botiga.Repository.ProductRepository;
 import com.accesadades.botiga.Repository.CategoriaRepository;
 import com.accesadades.botiga.Repository.SubcategoriaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,15 +43,17 @@ public class ProductServiceImpl implements BotigaService<ProductDTO, Long> {
     public void save(ProductDTO productDTO) {
         Product product = productMapper.toEntity(productDTO);
 
+            // Comprovem que la categoria existeixi
         Categoria categoria = categoriaRepository.findById(productDTO.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoria inexistent"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria inexistent"));
 
+        // Comprovem que la subcategoria existeixi
         Subcategoria subcategoria = subcategoriaRepository.findById(productDTO.getIdSubcategoria())
-                .orElseThrow(() -> new RuntimeException("Subcategoria inexistent"));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subcategoria inexistent"));
 
-        //Validació implementada 
+        // Comprovem que la subcategoria estigui dins de la categoria seleccionada
         if (!subcategoria.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())) {
-            throw new RuntimeException("La subcategoria no pertany a la categoria indicada");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La subcategoria no pertany a la categoria seleccionada");
         }
 
         product.setCategoria(categoria);
