@@ -9,23 +9,27 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-25T08:43:35+0200",
+    date = "2025-05-14T16:31:42+0200",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
 
     @Override
-    public Product toEntity(ProductDTO productDTO) {
-        if ( productDTO == null ) {
+    public Product toEntity(ProductDTO dto) {
+        if ( dto == null ) {
             return null;
         }
 
         Product product = new Product();
 
-        product.setName( productDTO.getNom() );
-        product.setPrice( (float) productDTO.getPreu() );
-        product.setDescription( productDTO.getDescripcio() );
+        product.setCategoria( productDTOToCategoria( dto ) );
+        product.setSubcategoria( productDTOToSubcategoria( dto ) );
+        product.setName( dto.getNom() );
+        product.setPrice( dto.getPreu() );
+        product.setDescription( dto.getDescripcio() );
+        product.setCompany( dto.getCompany() );
+        product.setUnits( dto.getUnits() );
 
         return product;
     }
@@ -41,10 +45,36 @@ public class ProductMapperImpl implements ProductMapper {
         productDTO.setNom( product.getName() );
         productDTO.setPreu( product.getPrice() );
         productDTO.setDescripcio( product.getDescription() );
+        productDTO.setCompany( product.getCompany() );
+        productDTO.setUnits( product.getUnits() );
         productDTO.setIdCategoria( productCategoriaIdCategoria( product ) );
         productDTO.setIdSubcategoria( productSubcategoriaIdSubcategoria( product ) );
 
         return productDTO;
+    }
+
+    protected Categoria productDTOToCategoria(ProductDTO productDTO) {
+        if ( productDTO == null ) {
+            return null;
+        }
+
+        Categoria categoria = new Categoria();
+
+        categoria.setIdCategoria( productDTO.getIdCategoria() );
+
+        return categoria;
+    }
+
+    protected Subcategoria productDTOToSubcategoria(ProductDTO productDTO) {
+        if ( productDTO == null ) {
+            return null;
+        }
+
+        Subcategoria subcategoria = new Subcategoria();
+
+        subcategoria.setIdSubcategoria( productDTO.getIdSubcategoria() );
+
+        return subcategoria;
     }
 
     private Long productCategoriaIdCategoria(Product product) {
